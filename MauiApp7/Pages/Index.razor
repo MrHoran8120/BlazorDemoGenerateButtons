@@ -1,0 +1,61 @@
+﻿@page "/"
+<style>
+    body {
+        background-color : beige;
+        margin : 10px;
+    }
+    .status {
+        background-color : darkblue;
+        color : white;
+        width : 100px;
+        height : 100px;
+        padding : 10px;
+        margin-top :30px;
+        margin-left : 10px;
+    }
+    .flexContainer {
+        display : flex;
+        justify-content : space-between;
+        margin-top : 10px;
+        max-width : 10;
+    }
+</style>
+
+
+<h1>Hello, world!</h1>
+
+<div>
+    How many buttons?
+    <input type="number" @bind=numOfButtons>
+    <button @onclick="clickhandler" >Enter</button>
+</div>
+
+<div class="status">
+    <h3>Status</h3>
+    @testString
+</div>
+<div class="flexContainer">
+    @((MarkupString)buttonCollection)
+    @*@buttonCollection*@
+
+</div>
+
+@code {
+    string testString = "startup";
+    int numOfButtons = 0;
+    string buttonCollection = "";
+    void clickhandler()
+    {
+        testString = "modified " + numOfButtons;
+        generateButtons();
+    }
+
+    void generateButtons()
+    {
+        buttonCollection = "";
+        for (int x = 1;x<numOfButtons;x++)
+        {
+            buttonCollection = buttonCollection + @"<Button>ClickMe</button>";
+        }
+    }
+}
